@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, TextInput, Button , KeyboardAvoidingView, Keyboard} from 'react-native';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { doc, updateDoc, onSnapshot } from "firebase/firestore";
+import { doc, updateDoc,setDoc, onSnapshot } from "firebase/firestore";
 import { db } from '../firebase';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -16,6 +16,14 @@ export default function Bucket() {
         const unsubscribe = onSnapshot(doc(db, "goals", user.uid), (documentSnapshot) => {
           if (documentSnapshot.exists()) {
             setGoals(documentSnapshot.data().goals);
+          }
+          else{
+            const defaultGoals = [
+              { id: '1', text: 'Visit Japan', isChecked: false },
+              { id: '2', text: 'Read 50 books this year', isChecked: false },
+              { id: '3', text: 'Run a marathon', isChecked: false },
+            ];
+            setDoc(doc(db, "goals", user.uid), { goals: defaultGoals });
           }
         });
         return () => unsubscribe();
@@ -90,7 +98,7 @@ export default function Bucket() {
         onChangeText={setNewGoalText}
         value={newGoalText}
         placeholder="Add a new goal"
-        maxLength={45}
+        maxLength={37}
       />
     </View>
     </KeyboardAvoidingView>
