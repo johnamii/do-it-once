@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { getUser } from '../components/UserProvider';
 
+import MemoriesScreen from '../screens/MemoriesScreen';
+
 // IMPORT SCREENS AND PUT IN RESPECTIVE STACK AS SOURCE COMPONENT
 
 function TempScreen ({route, navigation}) {
@@ -32,7 +34,7 @@ function MemoriesStackScreen (route, navigation) {
 
     return (
         <MemoriesStack.Navigator screenOptions={{headerShown: false}}>
-            <MemoriesStack.Screen name="Temp" component={TempScreen}/>
+            <MemoriesStack.Screen name="MemoriesScreen" component={MemoriesScreen}/>
         </MemoriesStack.Navigator>
     )
 }

@@ -4,9 +4,11 @@ import { signOut } from "firebase/auth";
 import { useState, useEffect } from 'react';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import MemoryTile from '../components/MemoryTile';
+import { getUser } from '../components/UserProvider';
 
-function MemoriesScreen({ user }) {
+function MemoriesScreen() {
   const [memories, setMemories] = useState([]);
+  const user = getUser();
 
   useEffect(() => {
     const fetchMemories = async () => {
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: '100%',
-    paddingTop: 100,
+    paddingTop: 20,
   },
   formContainer: {
     width: '100%',
