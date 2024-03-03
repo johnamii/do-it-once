@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { getUser } from '../components/UserProvider';
 
 import MemoriesScreen from '../screens/MemoriesScreen';
+import Bucket from '../screens/Buckets';
 
 // IMPORT SCREENS AND PUT IN RESPECTIVE STACK AS SOURCE COMPONENT
 
@@ -19,12 +20,10 @@ function TempScreen ({route, navigation}) {
 
 const BucketStack = createNativeStackNavigator();
 function BucketStackScreen ({route, navigation}) {
-
-    //const { user } = route.params;
     
     return (
         <BucketStack.Navigator screenOptions={{headerShown: false}}>
-            <BucketStack.Screen name="Temp" component={TempScreen}/>
+            <BucketStack.Screen name="Bucket" component={Bucket}/>
         </BucketStack.Navigator>
     )
 }
