@@ -2,20 +2,24 @@ import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { getUser } from '../components/UserProvider';
+
 // IMPORT SCREENS AND PUT IN RESPECTIVE STACK AS SOURCE COMPONENT
 
-function TempScreen () {
-
+function TempScreen ({route, navigation}) {
+    const user = getUser();
     return (
       <View>
-        <Text>Replace me!</Text>
+        <Text>{user?.email}</Text>
       </View>
     )
 }
 
 const BucketStack = createNativeStackNavigator();
-function BucketStackScreen () {
+function BucketStackScreen ({route, navigation}) {
 
+    //const { user } = route.params;
+    
     return (
         <BucketStack.Navigator screenOptions={{headerShown: false}}>
             <BucketStack.Screen name="Temp" component={TempScreen}/>
@@ -24,7 +28,7 @@ function BucketStackScreen () {
 }
 
 const MemoriesStack = createNativeStackNavigator();
-function MemoriesStackScreen () {
+function MemoriesStackScreen (route, navigation) {
 
     return (
         <MemoriesStack.Navigator screenOptions={{headerShown: false}}>
@@ -34,7 +38,7 @@ function MemoriesStackScreen () {
 }
 
 const FriendsStack = createNativeStackNavigator();
-function FriendsStackScreen () {
+function FriendsStackScreen (route, navigation) {
 
     return (
         <FriendsStack.Navigator screenOptions={{headerShown: false}}>
@@ -44,13 +48,16 @@ function FriendsStackScreen () {
 }
   
 const Tab = createBottomTabNavigator();
-export default function BottomNavBar() {
+export default function BottomNavBar({ route, navigation }) {
+
+    const user = getUser();
+
     return (
       <Tab.Navigator screenOptions={{headerShown: false}}>
         
-        <Tab.Screen name="Bucket" component={BucketStackScreen} />
-        <Tab.Screen name="Memories" component={MemoriesStackScreen} />
-        <Tab.Screen name="Friends" component={FriendsStackScreen} />
+        <Tab.Screen name="Bucket" component={BucketStackScreen}/>
+        <Tab.Screen name="Memories" component={MemoriesStackScreen}/>
+        <Tab.Screen name="Friends" component={FriendsStackScreen}/>
       </Tab.Navigator>
     );
 }

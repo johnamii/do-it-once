@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Button, View, Text, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../firebase';
 
-function SignUp({user, setUser}) {
+import { getUser } from './UserProvider';
 
+function SignUp({ route, navigation, setUser }) {
+
+  const user = getUser();
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -58,7 +62,9 @@ function SignUp({user, setUser}) {
               <Text style={styles.submitButtonText}>Sign Up</Text>
             </TouchableOpacity>
             <Text style={styles.label}>Already have an account?</Text>
-            <Text style={styles.alternativeButton}>Sign In</Text>
+            <Button title="Sign In" onPress={() => navigation.navigate('Sign In')}>
+              <Text style={styles.alternativeButton}>Sign In</Text>
+            </Button>
           </View>
         </>
         }

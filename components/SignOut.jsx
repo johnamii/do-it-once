@@ -1,8 +1,11 @@
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { auth } from '../firebase';
 import { signOut } from "firebase/auth";
+import { useUser } from './UserProvider';
 
-function SignOut({user}) {
+function SignOut() {
+
+  const user = useUser();
 
   const userSignOut = async () => {
     try {
