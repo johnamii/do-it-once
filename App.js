@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
@@ -6,54 +6,70 @@ import { auth } from './firebase';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { UserProvider } from './components/UserProvider';
+
 // Nav
 import BottomNavBar from './navigation/BottomNavbar';
 // Components
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
-import SignOut from './components/SignOut';
 
 const RootStack = createNativeStackNavigator();
 
 export default function App() {
 
-  const [currentUser, setCurrentUser] = useState(null);
-  let tempLoggedIn = true; // replace with user authentication logic when ready
+  const [user, setUser] = useState(null);
 
-  console.log('currentUser', currentUser?.email)
+  console.log('user', user?.email)
 
   useEffect(() => {
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentUser(user);
+        setUser(user);
       } else {
         console.log('User signed out');
       }
     })
 
-  }, [currentUser])
+  }, [user])
 
   return (
-    <NavigationContainer>
-        <RootStack.Navigator>
-          {
-            !tempLoggedIn ? (
-              <>
-                {/* IF NOT LOGGED IN AUTOMATICALLY, SHOW STACK */}
-                <RootStack.Screen name="Sign Up" component={SignUp}/>
-                <RootStack.Screen name="Sign In" component={SignIn}/>
-                <RootStack.Screen name="Sign Out" component={SignOut}/>
-              </>
-            ) : (
-              <>
-                {/* OTHERWISE, SHOW BOTTOMTABNAVIGATOR AS ROOT COMPONENT FOR MAIN APP */}
-                <RootStack.Screen name="Main App" component={BottomNavBar}/>
-              </>
-            )
-          }
-        </RootStack.Navigator>
-    </NavigationContainer>
+    <UserProvider user={user}>
+      <NavigationContainer>
+          <RootStack.Navigator>
+            {
+              !user ? (
+                <>
+                  {/* IF NOT LOGGED IN AUTOMATICALLY, SHOW STACK */}
+                  <RootStack.Screen 
+                    name="Sign Up" 
+                    component={SignUp}
+                    initialParams={{ user }}
+                    screenOptions={{headerShown: false}}
+                  />
+                  <RootStack.Screen 
+                    name="Sign In" 
+                    component={SignIn}
+                    initialParams={{ user }}
+                    screenOptions={{headerShown: false}}
+                  />
+                  {/* <RootStack.Screen name="Sign Out" component={SignOut}/> */}
+                </>
+              ) : (
+                <>
+                  {/* OTHERWISE, SHOW BOTTOMTABNAVIGATOR AS ROOT COMPONENT FOR MAIN APP */}
+                  <RootStack.Screen 
+                    name="Main App" 
+                    component={BottomNavBar} 
+                    screenOptions={{headerShown: false, user: user}}
+                  />
+                </>
+              )
+            }
+          </RootStack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
 }
 
