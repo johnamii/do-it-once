@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, TextInput, Button, KeyboardAvoidingView, Keyboard, Platform } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, TextInput, Button, KeyboardAvoidingView, Keyboard, Platform, Dimensions } from 'react-native';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, updateDoc, setDoc, onSnapshot } from "firebase/firestore";
 import { db } from '../firebase';
@@ -8,6 +8,10 @@ import AddMemoryWidget from '../components/AddMemoryWidget';
 export {currGoal}
 
 let currGoal = '';
+
+const screenWidth = Dimensions.get('window').width;
+const fieldWidth = screenWidth * 0.7; // 80% of the screen width
+
 export default function Bucket() {
   const [goals, setGoals] = useState([]);
   const [newGoalText, setNewGoalText] = useState('');
@@ -124,10 +128,15 @@ export default function Bucket() {
               style={styles.input}
               onChangeText={setNewGoalText}
               value={newGoalText}
-              placeholder="Add a new goal"
+              placeholder="What do you want to do?"
               maxLength={37}
             />
-            <Button title="Add Goal" onPress={addNewGoal} />
+
+            <View style={styles.addGoalWidgetButton}>
+              <TouchableOpacity onPress={addNewGoal}>
+                <Text style={styles.textStyle}>Add Goal</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           </>
         )}
@@ -148,10 +157,19 @@ const styles = StyleSheet.create({
     marginBottom: 60,
   },
   input: {
+    width: fieldWidth,
+    fontFamily: 'PermanentMarker',
     height: 40,
     margin: 12,
-    borderWidth: 1,
+    borderWidth: 3,
+    borderRadius: 8,
     padding: 10,
+  },
+  textStyle: {
+    fontFamily: 'PermanentMarker',
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   goalItem: {
     flexDirection: 'row',
@@ -170,21 +188,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
+  addGoalWidgetButton: {
+    width: '50%',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    borderRadius: 20,
+    padding: 10,
+    marginBottom: 20,
+  },
   overlayStyle: {
     position: 'absolute',
     width: '100%',
     height: '200%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black
-    zIndex: 1, // Ensure it's below the addGoalWidget but above everything else
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1,
   },
 
   addGoalWidget: {
     position: 'absolute',
+    alignItems: 'center',
     zIndex: 2, // Ensure it's above the overlay
     width: '80%', // Adjust size as needed
     left: '10%', // Center horizontally
     top: '30%', // Adjust vertical position as needed
-    bottom: '52%',
+    bottom: '50%',
     backgroundColor: 'white', // Or any other color
     paddingHorizontal: 12,
     padding: 5,
