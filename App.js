@@ -1,36 +1,82 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useFonts } from 'expo-font';
+
+import { UserProvider } from './components/UserProvider';
+
+// Nav
+import BottomNavBar from './navigation/BottomNavbar';
+// Components
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
-import SignOut from './components/SignOut';
-import Friends from './components/Friends';
+
+const RootStack = createNativeStackNavigator();
 
 export default function App() {
+  const [user, setUser] = useState(null);
 
-  const [currentUser, setCurrentUser] = useState(null);
-
-  console.log('currentUser', currentUser?.email)
+  // Load your custom font
+  const [fontsLoaded] = useFonts({
+    'PermanentMarker': require('./assets/fonts/PermanentMarker-Regular.ttf'), // Update the path and font name accordingly
+  });
 
   useEffect(() => {
-
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentUser(user);
+        setUser(user);
       } else {
         console.log('User signed out');
       }
-    })
+    });
+  }, [user]);
 
-  }, [currentUser])
+  // Display a loading indicator while fonts are loading
+  if (!fontsLoaded) {
+    return <ActivityIndicator size="large" />;
+  }
 
   return (
-    <View style={styles.container}>
-      <Friends/>
-      {/* <SignIn user={currentUser} setUser={setCurrentUser} /> */}
-      {/* <SignOut user={currentUser} /> */}
-    </View>
+    <UserProvider user={user}>
+      <NavigationContainer>
+        <RootStack.Navigator>
+          {!user ? (
+            <>
+              <RootStack.Screen
+                name="Sign Up"
+                component={SignUp}
+                initialParams={{ user }}
+                screenOptions={{ headerShown: false }}
+              />
+              <RootStack.Screen
+                name="Sign In"
+                component={SignIn}
+                initialParams={{ user }}
+                screenOptions={{ headerShown: false }}
+              />
+            </>
+          ) : (
+            <>
+              <RootStack.Screen
+                name="Main App"
+                component={BottomNavBar}
+                options={{
+                  headerShown: true,
+                  headerTitle: () => (
+                    <Text style={{ fontSize: 30, fontFamily: 'PermanentMarker' }}>Do it Once.</Text>
+                  ),
+                  headerTitleAlign: 'center',
+                }}
+              />
+            </>
+          )}
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
 }
 
