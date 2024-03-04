@@ -91,7 +91,7 @@ export default function Bucket() {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "ios" ? 100 : "height"}
       keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0}
     >
       <View style={styles.container}>
@@ -117,6 +117,8 @@ export default function Bucket() {
           )}
         />
         {showAddGoal && (
+          <>
+          <View style={styles.overlayStyle}></View>
           <View style={styles.addGoalWidget}>
             <TextInput
               style={styles.input}
@@ -127,6 +129,7 @@ export default function Bucket() {
             />
             <Button title="Add Goal" onPress={addNewGoal} />
           </View>
+          </>
         )}
         <AddMemoryWidget
           isVisible={showCompletionWidget}
@@ -135,6 +138,7 @@ export default function Bucket() {
         />
       </View>
     </KeyboardAvoidingView>
+    
   );
 }
 
@@ -166,8 +170,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
+  overlayStyle: {
+    position: 'absolute',
+    width: '100%',
+    height: '200%',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black
+    zIndex: 1, // Ensure it's below the addGoalWidget but above everything else
+  },
+
   addGoalWidget: {
+    position: 'absolute',
+    zIndex: 2, // Ensure it's above the overlay
+    width: '80%', // Adjust size as needed
+    left: '10%', // Center horizontally
+    top: '30%', // Adjust vertical position as needed
+    bottom: '52%',
+    backgroundColor: 'white', // Or any other color
     paddingHorizontal: 12,
+    padding: 5,
+    borderRadius: 10, // Optional: for rounded corners
+    shadowColor: '#000', // Optional: for shadow
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5, // For Android shadow effect
   },
   topLine: {
     width: '100%', // Make the line span the entire width of the screen
