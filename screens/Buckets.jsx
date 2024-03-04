@@ -76,6 +76,7 @@ export default function Bucket() {
     keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0}
   >
     <View style={styles.container}>
+      <View style={styles.topLine}></View>
       
       <FlatList
         data={goals}
@@ -108,9 +109,7 @@ export default function Bucket() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
     marginBottom: 60,
-    padding: 10,
   },
   input: {
     height: 40,
@@ -129,5 +128,10 @@ const styles = StyleSheet.create({
   },
   goalText: {
     marginLeft: 10,
+  },
+  topLine: {
+    width: '100%', // Make the line span the entire width of the screen
+    height: 5, // Set the height of the line
+    backgroundColor: 'black', // Set the color of the line
   },
 });

@@ -28,6 +28,7 @@ function MemoriesScreen() {
 
   return (
     <View style={styles.page}>
+      <View style={styles.topLine}></View>
       {user && (
         <ScrollView contentContainerStyle={styles.formContainer} showsVerticalScrollIndicator={false}>
           {memories.map((memory) => (
@@ -57,9 +58,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: '100%',
-    paddingTop: 20,
   },
   formContainer: {
+    paddingTop: 20,
     width: '100%',
     alignItems: 'center',
     paddingBottom: 20,
@@ -81,6 +82,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     textAlign: 'center',
+  },
+  topLine: {
+    width: '100%', // Make the line span the entire width of the screen
+    height: 5, // Set the height of the line
+    backgroundColor: 'black', // Set the color of the line
   },
 });
 
