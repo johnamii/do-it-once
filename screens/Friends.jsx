@@ -3,12 +3,13 @@ import { StyleSheet, View, Text, FlatList } from 'react-native';
 import UserTile from '../components/UserTile';
 import { getFirestore, collection, getDocs, query, where  } from 'firebase/firestore';
 import { getUser } from '../components/UserProvider';
+import { useFocusEffect } from '@react-navigation/native';
 
 const FriendsScreen = () => {
   const [users, setUsers] = useState([]);
   const user = getUser();
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const fetchProfileData = async () => {
       try {
         const db = getFirestore();
@@ -28,7 +29,7 @@ const FriendsScreen = () => {
     };
 
     fetchProfileData();
-  }, []); // Run the effect only once on component mount
+  }); // Run the effect only once on component mount
 
   return (
     <View>
