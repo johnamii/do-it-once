@@ -44,14 +44,16 @@ const UserTile = ({ profilePicture, userName, uid, onClickPicture1, onClickPictu
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginHorizontal: 16,
         marginTop: 20,
-        paddingTop: 20,
+        padding:20,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',  // Add this property
-        padding: 16,
-        border: '5px solid black',
-        width: '100%',  // Add this property
+        borderWidth: 5,
+        borderColor: '#000',
+        borderRadius: 8,
+        width: '90%',  // Add this property
         borderRadius: 5,
       },
   profilePicture: {
@@ -59,7 +61,9 @@ const styles = StyleSheet.create({
     height: 75,
     borderRadius: 40,
     marginRight: 16,
-    border: '5px solid black',
+    borderWidth: 5,
+    borderColor: '#000',
+    borderRadius: 100,
   },
   userInfoContainer: {
     flex: 1,
@@ -67,6 +71,7 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'PermanentMarker'
   },
   clickablePicturesContainer: {
     flexDirection: 'row',
