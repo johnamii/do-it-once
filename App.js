@@ -49,12 +49,18 @@ export default function App() {
               <RootStack.Screen
                 name="Sign Up"
                 component={SignUp}
+                options={{
+                  headerShown: false,
+                }}
                 initialParams={{ user }}
                 screenOptions={{ headerShown: false }}
               />
               <RootStack.Screen
                 name="Sign In"
                 component={SignIn}
+                options={{
+                  headerShown: false,
+                }}
                 initialParams={{ user }}
                 screenOptions={{ headerShown: false }}
               />

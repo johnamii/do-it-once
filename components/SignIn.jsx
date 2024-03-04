@@ -44,18 +44,18 @@ function SignIn({ route, navigation, setUser }) {
         <>
           <Text style={styles.heading}>Sign In</Text>
           <View style={styles.formContainer}>
-            <Text style={styles.label}>Username</Text>
             <TextInput
               style={styles.input}
               onChangeText={(val) => setUsername(val)}
               value={username}
+              placeholder="Username"
               autoCapitalize="none"              
             />
-            <Text style={styles.label}>Password</Text>
             <TextInput
               style={styles.input}
               onChangeText={(val) => setPassword(val)}
               value={password}
+              placeholder="Password"
               secureTextEntry
             />
             <TouchableOpacity onPress={userSignIn} style={styles.submitButton}>
@@ -81,13 +81,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  userMsg: {
-    fontSize: 18,
-    marginVertical: 20,
-    opacity: 0.5
-  },
   heading: {
-    fontSize: 40,
+    fontFamily: 'PermanentMarker',
+    fontSize: 25,
     marginBottom: 20
   },
   formContainer: {
@@ -96,11 +92,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   label: {
+    fontFamily: 'PermanentMarker',
     fontSize: 16,
-    marginTop: 20,
+    marginTop: 5,
     opacity: 0.5
   },
   input: {
+    fontFamily: 'PermanentMarker',
     fontSize: 20,
     borderWidth: 2,
     borderColor: '#ddd',
@@ -108,25 +106,27 @@ const styles = StyleSheet.create({
     textTransform: 'lowercase',
     margin: 8,
     padding: 12,
-    borderRadius: 6
+    borderRadius: 10
   },
   submitButton: {
     backgroundColor: 'black',
     width: '100%',
     padding: 14,
-    borderRadius: 6,
-    marginTop: 10,
+    borderRadius: 20,
+    marginTop: 15,
     marginBottom: 20
   },
   submitButtonText: {
+    fontFamily: 'PermanentMarker',
     color: 'white',
     fontSize: 20,
     textAlign: 'center'
   },
   alternativeButton: {
-    marginTop: 8
+    fontFamily: 'PermanentMarker',
+    marginTop: 8,
   }
-});
+})
 
 
 export default SignIn;

@@ -9,15 +9,6 @@ import MemoriesScreen from '../screens/MemoriesScreen';
 import Bucket from '../screens/Buckets';
 import FriendsScreen from '../screens/Friends';
 
-function TempScreen({route, navigation}) {
-  const user = getUser();
-  return (
-    <View>
-      <Text>{user?.email}</Text>
-    </View>
-  );
-}
-
 const commonHeaderStyle = {
   borderBottomWidth: 1, // Add a solid outline to the bottom of the top navbar
   borderBottomColor: 'black', // Set the color of the outline
