@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
-import UserTile from './UserTile';
+import UserTile from '../components/UserTile';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
-const Friends = () => {
+const FriendsScreen = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -46,4 +46,4 @@ const Friends = () => {
   );
 };
 
-export default Friends;
+export default FriendsScreen;

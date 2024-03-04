@@ -27,13 +27,15 @@ const ImgPreviewList = ({ memories }) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      borderTopWidth: 1,
-      borderBottomWidth: 1,
-      borderBottomColor: '#ccc',
+      borderTopWidth: 2,
+      borderBottomWidth: 2,
+      borderBottomColor: '#000',
       width: '100%',
     },
     minicontainer: {
-      border: "3px solid black",
+      borderWidth: 3,
+      borderColor: '#000',
+      borderRadius: 8,
       paddingHorizontal: 3,
       paddingVertical: 8,
       borderRadius: 3,
@@ -42,7 +44,9 @@ const ImgPreviewList = ({ memories }) => {
       width: 50, // adjust width as needed
       height: 50, // adjust height as needed
       marginHorizontal: 1, // add margin for spacing between images
-      border: "3px solid black",
+      borderWidth: 2,
+      borderColor: '#000',
+      borderRadius: 8,
       borderRadius: 3,
     },
   });
