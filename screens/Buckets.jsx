@@ -4,7 +4,9 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, updateDoc,setDoc, onSnapshot } from "firebase/firestore";
 import { db } from '../firebase';
 import { Ionicons } from '@expo/vector-icons';
+export {currGoal}
 
+let currGoal = '';
 export default function Bucket() {
   const [goals, setGoals] = useState([]);
   const [newGoalText, setNewGoalText] = useState('');
@@ -35,12 +37,24 @@ export default function Bucket() {
   }, []);
 
   const toggleGoalCheck = async (id) => {
-    const updatedGoals = goals.map((goal) =>
-      goal.id === id ? { ...goal, isChecked: !goal.isChecked } : goal
-    );
+    let goalJustCompleted = false;
+    const updatedGoals = goals.map((goal) => {
+      if (goal.id === id) {
+        if (!goal.isChecked) { // Goal is being marked as completed
+          goalJustCompleted = true;
+          currGoal = goal.text
+        }
+        return { ...goal, isChecked: !goal.isChecked };
+      }
+      return goal;
+    });
     const user = getAuth().currentUser;
     if (user) {
       await updateDoc(doc(db, "goals", user.uid), { goals: updatedGoals });
+    }
+    if(goalJustCompleted){
+      //call function that uses currGoal to build a new fun page
+      return null;
     }
   };
 
