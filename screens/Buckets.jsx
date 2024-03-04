@@ -4,6 +4,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, updateDoc, setDoc, onSnapshot } from "firebase/firestore";
 import { db } from '../firebase';
 import { Ionicons } from '@expo/vector-icons';
+import AddMemoryWidget from '../components/AddMemoryWidget';
 export {currGoal}
 
 let currGoal = '';
@@ -11,6 +12,7 @@ export default function Bucket() {
   const [goals, setGoals] = useState([]);
   const [newGoalText, setNewGoalText] = useState('');
   const [showAddGoal, setShowAddGoal] = useState(false);
+  const [showCompletionWidget, setShowAddMemoryWidget] = useState(false);
 
   useEffect(() => {
     const auth = getAuth();
@@ -55,6 +57,7 @@ export default function Bucket() {
     if(goalJustCompleted){
       //call function that uses currGoal to build a new fun page
       console.log(currGoal);
+      setShowAddMemoryWidget(true);
       return null;
     }
   };
@@ -125,6 +128,11 @@ export default function Bucket() {
             <Button title="Add Goal" onPress={addNewGoal} />
           </View>
         )}
+        <AddMemoryWidget
+          isVisible={showCompletionWidget}
+          goalText={currGoal}
+          onClose={() => setShowAddMemoryWidget(false)}
+        />
       </View>
     </KeyboardAvoidingView>
   );

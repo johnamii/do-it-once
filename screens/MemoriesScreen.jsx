@@ -5,12 +5,13 @@ import { useState, useEffect } from 'react';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import MemoryTile from '../components/MemoryTile';
 import { getUser } from '../components/UserProvider';
+import { useFocusEffect } from '@react-navigation/native';
 
 function MemoriesScreen() {
   const [memories, setMemories] = useState([]);
   const user = getUser();
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const fetchMemories = async () => {
       if (user) {
         const q = query(collection(db, "memories"), where("uid", "==", user.uid));
@@ -24,7 +25,7 @@ function MemoriesScreen() {
     };
 
     fetchMemories();
-  }, [user]);
+  },);
 
   return (
     <View style={styles.page}>
