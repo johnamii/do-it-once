@@ -77,16 +77,18 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'PermanentMarker',
+    fontSize: 22,
     marginTop: 8,
   },
   description: {
+    fontFamily: 'PermanentMarker',
     fontSize: 14,
     textAlign: 'center',
   },
   timestamp: {
-    fontSize: 12,
+    fontFamily: 'PermanentMarker',
+    fontSize: 15,
     color: '#666',
     marginTop: 4,
   },

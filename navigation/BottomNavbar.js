@@ -61,6 +61,7 @@ export default function BottomNavBar({ route, navigation }) {
         tabBarStyle: {
           borderTopWidth: 5, // Add a solid outline to the top of the bottom navbar
           borderTopColor: 'black', // Set the color of the outline
+          paddingTop: 5,
         },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;

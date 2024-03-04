@@ -70,14 +70,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     opacity: 0.5,
   },
-  submitButton: {
-    backgroundColor: 'black',
-    width: '100%',
-    padding: 14,
-    borderRadius: 6,
-    marginTop: 10,
-    marginBottom: 20,
-  },
   submitButtonText: {
     color: 'white',
     fontSize: 20,
