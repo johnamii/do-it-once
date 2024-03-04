@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { getUser } from '../components/UserProvider';
+import ProfileScreen from '../screens/ProfileScreen';
 
 import MemoriesScreen from '../screens/MemoriesScreen';
 import Bucket from '../screens/Buckets';
@@ -77,6 +78,11 @@ export default function BottomNavBar({ route, navigation }) {
       <Tab.Screen name="Bucket" component={BucketStackScreen}/>
       <Tab.Screen name="Memories" component={MemoriesStackScreen}/>
       <Tab.Screen name="Friends" component={FriendsStackScreen}/>
+      <Tab.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={{tabBarButton:()=> null}}
+              />
     </Tab.Navigator>
   );
 }

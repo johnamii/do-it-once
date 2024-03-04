@@ -1,15 +1,13 @@
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { auth } from '../firebase';
-import { signOut } from "firebase/auth";
-import { useUser } from './UserProvider';
+import { auth } from '../firebase.js';
 
-function SignOut() {
-
-  const user = useUser();
+function SignOut({ route, navigation }) {
 
   const userSignOut = async () => {
     try {
+      navigation.navigate("Sign In");
       await signOut(auth);
+      
     } catch(error) {
       console.log(error.message);
     }
@@ -19,8 +17,6 @@ function SignOut() {
     <View style={styles.page}>
       { user &&  
         <View style={styles.formContainer}>
-          <Text style={styles.label}>Hi, {user.email}</Text> 
-          <Text style={styles.heading}>Sign Out</Text>
           <View style={styles.formContainer}>
             <TouchableOpacity onPress={userSignOut} style={styles.submitButton}>
               <Text style={styles.submitButtonText}>Sign Out</Text>
@@ -44,6 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: '100%',
+    
   },
   heading: {
     fontSize: 40,
@@ -52,7 +49,7 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '75%',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   label: {
     fontSize: 16,
@@ -73,9 +70,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     width: '100%',
     padding: 14,
-    borderRadius: 6,
-    marginTop: 10,
-    marginBottom: 20
+    borderRadius: 30,
+    marginTop: 20,
   },
   submitButtonText: {
     color: 'white',
