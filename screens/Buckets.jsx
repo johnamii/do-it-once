@@ -92,6 +92,7 @@ export default function Bucket() {
       keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0}
     >
       <View style={styles.container}>
+        <View style={styles.topLine}></View>
         <FlatList
           data={goals}
           keyExtractor={(item) => item.id}
@@ -159,5 +160,10 @@ const styles = StyleSheet.create({
   },
   addGoalWidget: {
     paddingHorizontal: 12,
+  },
+  topLine: {
+    width: '100%', // Make the line span the entire width of the screen
+    height: 5, // Set the height of the line
+    backgroundColor: 'black', // Set the color of the line
   },
 });
