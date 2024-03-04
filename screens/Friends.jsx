@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import UserTile from '../components/UserTile';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, query, where  } from 'firebase/firestore';
+import { getUser } from '../components/UserProvider';
 
 const FriendsScreen = () => {
   const [users, setUsers] = useState([]);
+  const user = getUser();
 
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
         const db = getFirestore();
         const usersCollection = collection(db, 'profiles');
-        const querySnapshot = await getDocs(usersCollection);
+        const querySnapshot = await getDocs(query(usersCollection, where('uid', '!=', user.uid)));
 
         const userData = [];
         querySnapshot.forEach((doc) => {
