@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 import UserTile from '../components/UserTile';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
@@ -30,6 +30,7 @@ const FriendsScreen = () => {
 
   return (
     <View>
+      <View style={styles.topLine}></View>
       <FlatList
         data={users}
         keyExtractor={(item) => item.id}
@@ -45,5 +46,13 @@ const FriendsScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  topLine: {
+    width: '100%',
+    height: 5,
+    backgroundColor: 'black',
+  },
+});
 
 export default FriendsScreen;

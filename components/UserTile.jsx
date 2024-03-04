@@ -42,23 +42,22 @@ const UserTile = ({ profilePicture, userName, uid, onClickPicture1, onClickPictu
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginHorizontal: 16,
-        marginTop: 20,
-        padding:20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',  // Add this property
-        borderWidth: 5,
-        borderColor: '#000',
-        borderRadius: 8,
-        width: '90%',  // Add this property
-        borderRadius: 5,
-      },
+  container: {
+      flex: 1,
+      marginHorizontal: 16,
+      marginTop: 20,
+      padding: 5,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      borderWidth: 5,
+      borderColor: '#000',
+      borderRadius: 15,
+      width: '90%',
+  },
   profilePicture: {
-    width: 75,
-    height: 75,
+    width: 100,
+    height: 100,
     borderRadius: 40,
     marginRight: 16,
     borderWidth: 5,

@@ -5,7 +5,7 @@ const ImgPreviewList = ({ memories }) => {
   return (
     <View style={styles.container}>
       {/* <Button title="Click Me" onPress={() => console.log('memories', memories)} /> */}
-      <FlatList
+      <FlatList showsHorizontalScrollIndicator={false}
         horizontal
         data={memories}
         keyExtractor={(item) => item.id}
@@ -27,9 +27,6 @@ const ImgPreviewList = ({ memories }) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      borderTopWidth: 2,
-      borderBottomWidth: 2,
-      borderBottomColor: '#000',
       width: '100%',
     },
     minicontainer: {
