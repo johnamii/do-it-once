@@ -5,6 +5,7 @@ import { auth } from './firebase';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
+import Friends from './components/Friends';
 
 export default function App() {
 
@@ -26,7 +27,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <SignUp user={currentUser} setUser={setCurrentUser} />
+      <Friends/>
       {/* <SignIn user={currentUser} setUser={setCurrentUser} /> */}
       {/* <SignOut user={currentUser} /> */}
     </View>
