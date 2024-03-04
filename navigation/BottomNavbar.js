@@ -7,6 +7,7 @@ import { getUser } from '../components/UserProvider';
 
 import MemoriesScreen from '../screens/MemoriesScreen';
 import Bucket from '../screens/Buckets';
+import FriendsScreen from '../screens/Friends';
 
 function TempScreen({route, navigation}) {
   const user = getUser();
@@ -44,7 +45,7 @@ const FriendsStack = createNativeStackNavigator();
 function FriendsStackScreen(route, navigation) {
   return (
     <FriendsStack.Navigator screenOptions={{headerShown: false, headerStyle: commonHeaderStyle}}>
-      <FriendsStack.Screen name="Temp" component={TempScreen}/>
+      <FriendsStack.Screen name="Temp" component={FriendsScreen}/>
     </FriendsStack.Navigator>
   );
 }
